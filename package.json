@@ -10,8 +10,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "e2e:chrome": "cypress run --browser chrome",
-    "e2e:electron": "cypress run --browser electron",
-    "e2e:chromium": "cypress run --browser chromium"
+    "e2e:electron": "cypress run --browser electron"
     
   },
   "author": "",
