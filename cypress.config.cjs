@@ -14,8 +14,12 @@ module.exports = defineConfig({
             imageUrls.push(`https://picsum.photos/200/300.jpg?random=${i + 1}`);
           }
 
-          const imagePaths = [];
           const folderPath = path.join(__dirname, 'cypress', 'downloads');
+          if (!fs.existsSync(folderPath)) {
+            fs.mkdirSync(folderPath, { recursive: true });
+          }
+
+          const imagePaths = [];
           for (let i = 0; i < imageUrls.length; i++) {
             const url = imageUrls[i];
             const fileName = `download_${count}_photo${i + 1}.${format}`;
