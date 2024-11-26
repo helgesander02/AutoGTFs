@@ -1,15 +1,16 @@
-describe('My First Test', () => {
-    it('visits the app', () => {
-        cy.request('https://picsum.photos/200') // 200 是圖片的尺寸
-          .then((response) => {
-            // Step 2: 檢查響應狀態碼是否為 200
-            expect(response.status).to.eq(200);
-
-            // Step 3: 獲取圖片的 URL
-            const imageUrl = response.body;
-
-            // Step 4: 使用 Cypress 的 file 下載圖片
-            cy.writeFile('cypress/downloads/random-image.jpg', response.body, 'binary');
+describe('Validate downloaded images', () => {
+    it('should download images and verify their existence', () => {
+      const count = 5;
+      const format = 'jpg';
+  
+      cy.task('downloadImageFromUrl', { count, format }).then((downloadedPaths) => {
+        downloadedPaths.forEach((filePath) => {
+          cy.readFile(filePath, 'binary').then((fileContent) => {
+            expect(fileContent.length).to.be.greaterThan(0);
+            cy.log(`Verified file exists: ${filePath}`);
+          });
         });
-    })
-  })
+      });
+    });
+  });
+  
